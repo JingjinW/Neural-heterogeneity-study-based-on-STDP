@@ -1,0 +1,1025 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{PING\_1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{brian2} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{k+kn}{import} \PY{n+nn}{time}
+\end{Verbatim}
+
+
+    \hypertarget{reduced-traub-miles-e-cells}{%
+\subsubsection{Reduced Traub-Miles
+E-cells}\label{reduced-traub-miles-e-cells}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{c+c1}{\PYZsh{} params}
+          
+          \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1}
+          
+          \PY{n}{Cm} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ufarad}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{El} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{67}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{ENa} \PY{o}{=} \PY{l+m+mi}{50}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{EK} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{gl} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{gNa} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{gK} \PY{o}{=} \PY{l+m+mi}{80}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{c+c1}{\PYZsh{} H\PYZhy{}H eqs for cell}
+          \PY{n}{eqs} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{dv/dt = ( (gl * (El\PYZhy{}v) + gNa * m**3 * h * (ENa\PYZhy{}v) + gK * n**4 * (EK\PYZhy{}v) + I))/Cm : volt}
+          \PY{l+s+s1}{I : amp*meter**\PYZhy{}2}
+          \PY{l+s+s1}{m = alpham / (alpham + betam) :1}
+          \PY{l+s+s1}{dn/dt = alphan * (1\PYZhy{}n) \PYZhy{} betan * n : 1}
+          \PY{l+s+s1}{dh/dt = alphah * (1\PYZhy{}h) \PYZhy{} betah * h : 1}
+          \PY{l+s+s1}{alpham = (0.32/mV) * (v+54*mV) / (\PYZhy{}exp((\PYZhy{}v\PYZhy{}54*mV) / (4*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{betam = (0.28/mV) * (v+27*mV)/ (exp((v+27*mV)/(5*mV)) \PYZhy{} 1)/ms : Hz}
+          \PY{l+s+s1}{alphah = (0.128) * exp(\PYZhy{}(v+50*mV)/(18*mV))/ms : Hz}
+          \PY{l+s+s1}{betah = 4/(exp((\PYZhy{}v\PYZhy{}27*mV) / (5*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{alphan = (0.032/mV) * (v+52*mV) / (\PYZhy{}exp(\PYZhy{}(v+52*mV) / (5*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{betan = 0.5*exp(\PYZhy{}(v+57*mV)/(40*mV))/ms : Hz}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+          \PY{n}{G} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{eqs}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZgt{}0*mV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exponential\PYZus{}euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{M} \PY{o}{=} \PY{n}{StateMonitor}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{record}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{n}{G}\PY{o}{.}\PY{n}{I} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{uA}\PY{o}{*}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}
+          \PY{n}{G}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{o}{*}\PY{n}{mV}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{run}\PY{p}{(}\PY{l+m+mi}{40}\PY{o}{*}\PY{n}{ms}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{M}\PY{o}{.}\PY{n}{t}\PY{o}{/}\PY{n}{ms}\PY{p}{,} \PY{l+m+mi}{1000}\PY{o}{*}\PY{n}{M}\PY{o}{.}\PY{n}{v}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} plot(M.t/ms, 1\PYZhy{}exp(\PYZhy{}M.t/tau), \PYZsq{}C1\PYZhy{}\PYZhy{}\PYZsq{},label=\PYZsq{}Analytic\PYZsq{})}
+          \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (ms)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_6_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{wang-buzsaki-i-cells}{%
+\subsubsection{Wang-Buzsaki I-cells}\label{wang-buzsaki-i-cells}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{c+c1}{\PYZsh{} params}
+          
+          \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1}
+          
+          \PY{n}{Cm} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ufarad}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{El} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{65}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{ENa} \PY{o}{=} \PY{l+m+mi}{55}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{EK} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{gl} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{gNa} \PY{o}{=} \PY{l+m+mi}{35}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+          \PY{n}{gK} \PY{o}{=} \PY{l+m+mi}{9}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{c+c1}{\PYZsh{} H\PYZhy{}H eqs for cell}
+          \PY{n}{eqs} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+          \PY{l+s+s1}{dv/dt = ( (gl * (El\PYZhy{}v) + gNa * m**3 * h * (ENa\PYZhy{}v) + gK * n**4 * (EK\PYZhy{}v) + I))/Cm : volt}
+          \PY{l+s+s1}{I : amp*meter**\PYZhy{}2}
+          \PY{l+s+s1}{m = alpham / (alpham + betam) :1}
+          \PY{l+s+s1}{dn/dt = alphan * (1\PYZhy{}n) \PYZhy{} betan * n : 1}
+          \PY{l+s+s1}{dh/dt = alphah * (1\PYZhy{}h) \PYZhy{} betah * h : 1}
+          \PY{l+s+s1}{alpham = (0.1/mV) * (v+35*mV) / (\PYZhy{}exp((\PYZhy{}v\PYZhy{}35*mV) / (10*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{betam = 4 * exp(\PYZhy{}(v+60*mV)/(18*mV))/ms : Hz}
+          \PY{l+s+s1}{alphah = (0.35) * exp(\PYZhy{}(v+58*mV)/(20*mV))/ms : Hz}
+          \PY{l+s+s1}{betah = 5/(exp((\PYZhy{}v\PYZhy{}28*mV) / (10*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{alphan = (0.05/mV) * (v+34*mV) / (\PYZhy{}exp(\PYZhy{}(v+34*mV) / (10*mV)) + 1)/ms : Hz}
+          \PY{l+s+s1}{betan = (0.625)*exp(\PYZhy{}(v+44*mV)/(80*mV))/ms : Hz}
+          \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+          \PY{n}{G} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{eqs}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZgt{}0*mV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                          \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exponential\PYZus{}euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{M} \PY{o}{=} \PY{n}{StateMonitor}\PY{p}{(}\PY{n}{G}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{record}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          
+          \PY{n}{G}\PY{o}{.}\PY{n}{I} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{uA}\PY{o}{*}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}
+          \PY{n}{G}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{o}{*}\PY{n}{mV}
+          \PY{n}{run}\PY{p}{(}\PY{l+m+mi}{40}\PY{o}{*}\PY{n}{ms}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{M}\PY{o}{.}\PY{n}{t}\PY{o}{/}\PY{n}{ms}\PY{p}{,} \PY{l+m+mi}{1000}\PY{o}{*}\PY{n}{M}\PY{o}{.}\PY{n}{v}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Brian}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} plot(M.t/ms, 1\PYZhy{}exp(\PYZhy{}M.t/tau), \PYZsq{}C1\PYZhy{}\PYZhy{}\PYZsq{},label=\PYZsq{}Analytic\PYZsq{})}
+          \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Time (ms)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{legend}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{synapses}{%
+\subsubsection{Synapses}\label{synapses}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} E cells}
+         \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{Cm} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ufarad}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{El} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{67}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{ENa} \PY{o}{=} \PY{l+m+mi}{50}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{EK} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{gl} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{gNa} \PY{o}{=} \PY{l+m+mi}{100}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{gK} \PY{o}{=} \PY{l+m+mi}{80}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{V\PYZus{}I} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{80}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{V\PYZus{}E} \PY{o}{=} \PY{l+m+mi}{0}\PY{o}{*}\PY{n}{mV}
+         
+         \PY{n}{gampa} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{ggaba} \PY{o}{=} \PY{l+m+mf}{0.6}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         
+         \PY{n}{eqs} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{dv/dt = ( (gl * (El\PYZhy{}v) + gNa * m**3 * h * (ENa\PYZhy{}v) + gK * n**4 * (EK\PYZhy{}v) + Isyn))/Cm : volt}
+         \PY{l+s+s1}{Isyn = Igaba : amp*meter**\PYZhy{}2}
+         \PY{l+s+s1}{Igaba = ggaba * (V\PYZus{}I \PYZhy{} v) * sgaba\PYZus{}tot : amp*meter**\PYZhy{}2}
+         \PY{l+s+s1}{sgaba\PYZus{}tot : 1}
+         \PY{l+s+s1}{m = alpham / (alpham + betam) :1}
+         \PY{l+s+s1}{dn/dt = alphan * (1\PYZhy{}n) \PYZhy{} betan * n : 1}
+         \PY{l+s+s1}{dh/dt = alphah * (1\PYZhy{}h) \PYZhy{} betah * h : 1}
+         \PY{l+s+s1}{alpham = (0.32/mV) * (v+54*mV) / (\PYZhy{}exp((\PYZhy{}v\PYZhy{}54*mV) / (4*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{betam = (0.28/mV) * (v+27*mV)/ (exp((v+27*mV)/(5*mV)) \PYZhy{} 1)/ms : Hz}
+         \PY{l+s+s1}{alphah = (0.128) * exp(\PYZhy{}(v+50*mV)/(18*mV))/ms : Hz}
+         \PY{l+s+s1}{betah = 4/(exp((\PYZhy{}v\PYZhy{}27*mV) / (5*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{alphan = (0.032/mV) * (v+52*mV) / (\PYZhy{}exp(\PYZhy{}(v+52*mV) / (5*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{betan = 0.5*exp(\PYZhy{}(v+57*mV)/(40*mV))/ms : Hz}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{Ecells} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{eqs}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZgt{}0*mV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{Ecells}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{o}{*}\PY{n}{mV}
+         
+         \PY{n}{Me} \PY{o}{=} \PY{n}{StateMonitor}\PY{p}{(}\PY{n}{Ecells}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{record}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{Cm} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{*}\PY{n}{ufarad}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{El} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{65}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{ENa} \PY{o}{=} \PY{l+m+mi}{55}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{EK} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{90}\PY{o}{*}\PY{n}{mV}
+         \PY{n}{gl} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{gNa} \PY{o}{=} \PY{l+m+mi}{35}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{gK} \PY{o}{=} \PY{l+m+mi}{9}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{c+c1}{\PYZsh{} a diff ggaba}
+         \PY{n}{ggaba} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{o}{*}\PY{n}{msiemens}\PY{o}{/}\PY{n}{cm}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         
+         
+         \PY{n}{eqs} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{dv/dt = ( (gl * (El\PYZhy{}v) + gNa * m**3 * h * (ENa\PYZhy{}v) + gK * n**4 * (EK\PYZhy{}v) + Isyn))/Cm : volt}
+         \PY{l+s+s1}{Isyn = Igaba + Iampa : amp*meter**\PYZhy{}2}
+         \PY{l+s+s1}{Igaba = ggaba * (V\PYZus{}I \PYZhy{} v) * sgaba\PYZus{}tot : amp*meter**\PYZhy{}2}
+         \PY{l+s+s1}{Iampa = gampa * (V\PYZus{}E \PYZhy{} v) * sampa\PYZus{}tot : amp*meter**\PYZhy{}2}
+         \PY{l+s+s1}{sampa\PYZus{}tot : 1}
+         \PY{l+s+s1}{sgaba\PYZus{}tot : 1}
+         \PY{l+s+s1}{m = alpham / (alpham + betam) :1}
+         \PY{l+s+s1}{dn/dt = alphan * (1\PYZhy{}n) \PYZhy{} betan * n : 1}
+         \PY{l+s+s1}{dh/dt = alphah * (1\PYZhy{}h) \PYZhy{} betah * h : 1}
+         \PY{l+s+s1}{alpham = (0.1/mV) * (v+35*mV) / (\PYZhy{}exp((\PYZhy{}v\PYZhy{}35*mV) / (10*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{betam = 4 * exp(\PYZhy{}(v+60*mV)/(18*mV))/ms : Hz}
+         \PY{l+s+s1}{alphah = (0.35) * exp(\PYZhy{}(v+58*mV)/(20*mV))/ms : Hz}
+         \PY{l+s+s1}{betah = 5/(exp((\PYZhy{}v\PYZhy{}28*mV) / (10*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{alphan = (0.05/mV) * (v+34*mV) / (\PYZhy{}exp(\PYZhy{}(v+34*mV) / (10*mV)) + 1)/ms : Hz}
+         \PY{l+s+s1}{betan = (0.625)*exp(\PYZhy{}(v+44*mV)/(80*mV))/ms : Hz}
+         
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{n}{Icells} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N}\PY{p}{,} \PY{n}{eqs}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v\PYZgt{}0*mV}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                         \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{Icells}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{60}\PY{o}{*}\PY{n}{mV}
+         
+         \PY{n}{MI} \PY{o}{=} \PY{n}{StateMonitor}\PY{p}{(}\PY{n}{Icells}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{record}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} Synapses}
+         \PY{n}{tausampar} \PY{o}{=} \PY{l+m+mf}{0.2}\PY{o}{*}\PY{n}{ms}
+         \PY{n}{tausampad} \PY{o}{=} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{ms}
+         \PY{n}{tausgabar} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{n}{ms}
+         \PY{n}{tausgabad} \PY{o}{=} \PY{l+m+mi}{10}\PY{o}{*}\PY{n}{ms}
+         
+         \PY{n}{eqs\PYZus{}ampa}  \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{ }
+         \PY{l+s+s1}{sampa\PYZus{}tot\PYZus{}post = w*sampa : 1 (summed)}
+         \PY{l+s+s1}{dsampa/dt= (1+tanh(v\PYZus{}pre/10))/2 * (1\PYZhy{}sampa)/tausampar \PYZhy{} sampa/tausampad : 1 (clock\PYZhy{}driven)}
+         \PY{l+s+s1}{w : 1 \PYZsh{} synaptic weight}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{eqs\PYZus{}gaba}  \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{ }
+         \PY{l+s+s1}{sgaba\PYZus{}tot\PYZus{}post = w*sgaba : 1 (summed)}
+         \PY{l+s+s1}{dsgaba/dt= (1+tanh(v\PYZus{}pre/10))/2 * (1\PYZhy{}sgaba)/tausgabar \PYZhy{} sgaba/tausgabad : 1 (clock\PYZhy{}driven)}
+         \PY{l+s+s1}{w : 1 \PYZsh{} synaptic weight}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{} E to I, ampa}
+         \PY{n}{C\PYZus{}E\PYZus{}I} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{Ecells}\PY{p}{,} \PY{n}{Icells}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{n}{eqs\PYZus{}ampa}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} C\PYZus{}E\PYZus{}I = Synapses(Ecells, Icells, model=eqs\PYZus{}ampa, method=\PYZsq{}euler\PYZsq{})}
+         
+         \PY{n}{C\PYZus{}E\PYZus{}I}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{p}{)}
+         \PY{n}{C\PYZus{}E\PYZus{}I}\PY{o}{.}\PY{n}{w}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} I to I}
+         \PY{n}{C\PYZus{}I\PYZus{}I} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{Icells}\PY{p}{,} \PY{n}{Icells}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}gaba}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} C\PYZus{}I\PYZus{}I.connect(\PYZsq{}i != j\PYZsq{})}
+         \PY{n}{C\PYZus{}I\PYZus{}I}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} C\PYZus{}I\PYZus{}I.w[:] = 1}
+         
+         
+         \PY{c+c1}{\PYZsh{} I to E}
+         \PY{n}{C\PYZus{}I\PYZus{}E} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{Icells}\PY{p}{,} \PY{n}{Ecells}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}gaba}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}I\PYZus{}E}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} C\PYZus{}I\PYZus{}E.w[:] = 1}
+         
+         
+         
+         \PY{n}{sp\PYZus{}E} \PY{o}{=} \PY{n}{SpikeMonitor}\PY{p}{(}\PY{n}{Ecells}\PY{p}{)}
+         \PY{n}{sp\PYZus{}I} \PY{o}{=} \PY{n}{SpikeMonitor}\PY{p}{(}\PY{n}{Icells}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}dv/dt = ( (gl * (El\PYZhy{}v) + gNa * m**3 * h * (ENa\PYZhy{}v) + gK * n**4 * (EK\PYZhy{}v) + I +}
+          \PY{c+c1}{\PYZsh{}       gei*(ve \PYZhy{} v)))/Cm : volt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyError                                  Traceback (most recent call last)
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/brian2/groups/group.py in state(self, name, use\_units, level)
+        353         try:
+    --> 354             var = self.variables[name]
+        355         except KeyError:
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/brian2/core/variables.py in \_\_getitem\_\_(self, item)
+       1411     def \_\_getitem\_\_(self, item):
+    -> 1412         return self.\_variables[item]
+       1413 
+
+
+        KeyError: 'w'
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        KeyError                                  Traceback (most recent call last)
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/brian2/groups/group.py in \_\_getattr\_\_(self, name)
+        389                 use\_units = True
+    --> 390             return self.state(name, use\_units)
+        391 
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/brian2/groups/group.py in state(self, name, use\_units, level)
+        355         except KeyError:
+    --> 356             raise KeyError("State variable "+name+" not found.")
+        357 
+
+
+        KeyError: 'State variable w not found.'
+
+        
+    During handling of the above exception, another exception occurred:
+
+
+        AttributeError                            Traceback (most recent call last)
+
+        <ipython-input-66-ee3beb2872c7> in <module>()
+        114 C\_I\_E = Synapses(Icells, Ecells, on\_pre=eqs\_gaba, method='euler')
+        115 C\_I\_E.connect()
+    --> 116 C\_I\_E.w[:] = 1
+        117 
+        118 
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/brian2/groups/group.py in \_\_getattr\_\_(self, name)
+        391 
+        392         except KeyError:
+    --> 393             raise AttributeError('No attribute with name ' + name)
+        394 
+        395     def \_\_setattr\_\_(self, name, val, level=0):
+
+
+        AttributeError: No attribute with name w
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{start\PYZus{}scope}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} net = Network(collect())}
+         
+         \PY{c+c1}{\PYZsh{} net.add(sp\PYZus{}E)}
+         \PY{c+c1}{\PYZsh{} net.add(sp\PYZus{}I)}
+         \PY{c+c1}{\PYZsh{} \PYZsh{} M = SpikeMonitor(G)}
+         \PY{c+c1}{\PYZsh{} net.run(4 * ms, report=\PYZsq{}stdout\PYZsq{})}
+         
+         
+         \PY{c+c1}{\PYZsh{} gmax = 0.01}
+         \PY{c+c1}{\PYZsh{} taupre = 20*ms}
+         \PY{c+c1}{\PYZsh{} taupost = taupre}
+         \PY{c+c1}{\PYZsh{} dApre = .01}
+         \PY{c+c1}{\PYZsh{} dApost = \PYZhy{}dApre * taupre / taupost * 1.05}
+         \PY{c+c1}{\PYZsh{} dApost *= gmax}
+         \PY{c+c1}{\PYZsh{} dApre *= gmax}
+         \PY{c+c1}{\PYZsh{} S = Synapses(Ecells, Icells,}
+         \PY{c+c1}{\PYZsh{}              \PYZsq{}\PYZsq{}\PYZsq{}w : 1}
+         \PY{c+c1}{\PYZsh{}                 dApre/dt = \PYZhy{}Apre / taupre : 1 (event\PYZhy{}driven)}
+         \PY{c+c1}{\PYZsh{}                 dApost/dt = \PYZhy{}Apost / taupost : 1 (event\PYZhy{}driven)\PYZsq{}\PYZsq{}\PYZsq{},}
+         \PY{c+c1}{\PYZsh{}              on\PYZus{}pre=\PYZsq{}\PYZsq{}\PYZsq{}ge += w}
+         \PY{c+c1}{\PYZsh{}                     Apre += dApre}
+         \PY{c+c1}{\PYZsh{}                     w = clip(w + Apost, 0, gmax)\PYZsq{}\PYZsq{}\PYZsq{},}
+         \PY{c+c1}{\PYZsh{}              on\PYZus{}post=\PYZsq{}\PYZsq{}\PYZsq{}Apost += dApost}
+         \PY{c+c1}{\PYZsh{}                      w = clip(w + Apre, 0, gmax)\PYZsq{}\PYZsq{}\PYZsq{},}
+         \PY{c+c1}{\PYZsh{}              )}
+         \PY{c+c1}{\PYZsh{} S.connect()}
+         \PY{c+c1}{\PYZsh{} S.w = \PYZsq{}rand() * gmax\PYZsq{}}
+         \PY{c+c1}{\PYZsh{} mon = StateMonitor(S, \PYZsq{}w\PYZsq{}, record=[0, 1])}
+         \PY{c+c1}{\PYZsh{} w=1.0*volt}
+         \PY{c+c1}{\PYZsh{} S = Synapses(Ecells, Icells, model=\PYZsq{}w : volt\PYZsq{}, on\PYZus{}pre=\PYZsq{}v += w\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} S.connect()}
+         
+         
+         
+         \PY{c+c1}{\PYZsh{} run(10*ms, report=\PYZsq{}text\PYZsq{})}
+         \PY{n}{run}\PY{p}{(}\PY{l+m+mi}{20}\PY{o}{*}\PY{n}{ms}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} subplot(311)}
+         \PY{c+c1}{\PYZsh{} plot(S.w / gmax, \PYZsq{}.k\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} ylabel(\PYZsq{}Weight / gmax\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} xlabel(\PYZsq{}Synapse index\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} subplot(312)}
+         \PY{c+c1}{\PYZsh{} hist(S.w / gmax, 20)}
+         \PY{c+c1}{\PYZsh{} xlabel(\PYZsq{}Weight / gmax\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} subplot(313)}
+         \PY{c+c1}{\PYZsh{} plot(mon.t/second, mon.w.T/gmax)}
+         \PY{c+c1}{\PYZsh{} xlabel(\PYZsq{}Time (s)\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} ylabel(\PYZsq{}Weight / gmax\PYZsq{})}
+         \PY{c+c1}{\PYZsh{} tight\PYZus{}layout()}
+         \PY{c+c1}{\PYZsh{} show()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} sp\PYZus{}I.t}
+         \PY{n}{MI}\PY{o}{.}\PY{n}{t}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} <statemonitor\_2.t: array([], dtype=float64) * second>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{sp\PYZus{}I}\PY{o}{.}\PY{n}{t}\PY{o}{/}\PY{n}{ms}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} [<matplotlib.lines.Line2D at 0x11df2d470>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{from} \PY{n+nn}{brian2} \PY{k}{import} \PY{o}{*}
+         
+         \PY{c+c1}{\PYZsh{} populations}
+         \PY{n}{N} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{N\PYZus{}E} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{N} \PY{o}{*} \PY{l+m+mf}{0.8}\PY{p}{)}  \PY{c+c1}{\PYZsh{} pyramidal neurons}
+         \PY{n}{N\PYZus{}I} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{N} \PY{o}{*} \PY{l+m+mf}{0.2}\PY{p}{)}  \PY{c+c1}{\PYZsh{} interneurons}
+         
+         \PY{c+c1}{\PYZsh{} voltage}
+         \PY{n}{V\PYZus{}L} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{70.} \PY{o}{*} \PY{n}{mV}
+         \PY{n}{V\PYZus{}thr} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{50.} \PY{o}{*} \PY{n}{mV}
+         \PY{n}{V\PYZus{}reset} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{55.} \PY{o}{*} \PY{n}{mV}
+         \PY{n}{V\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{0.} \PY{o}{*} \PY{n}{mV}
+         \PY{n}{V\PYZus{}I} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{70.} \PY{o}{*} \PY{n}{mV}
+         
+         \PY{c+c1}{\PYZsh{} membrane capacitance}
+         \PY{n}{C\PYZus{}m\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{nF}
+         \PY{n}{C\PYZus{}m\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{0.2} \PY{o}{*} \PY{n}{nF}
+         
+         \PY{c+c1}{\PYZsh{} membrane leak}
+         \PY{n}{g\PYZus{}m\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{25.} \PY{o}{*} \PY{n}{nS}
+         \PY{n}{g\PYZus{}m\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{20.} \PY{o}{*} \PY{n}{nS}
+         
+         \PY{c+c1}{\PYZsh{} refractory period}
+         \PY{n}{tau\PYZus{}rp\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{2.} \PY{o}{*} \PY{n}{ms}
+         \PY{n}{tau\PYZus{}rp\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{1.} \PY{o}{*} \PY{n}{ms}
+         
+         \PY{c+c1}{\PYZsh{} external stimuli}
+         \PY{n}{rate} \PY{o}{=} \PY{l+m+mi}{3} \PY{o}{*} \PY{n}{Hz}
+         \PY{n}{C\PYZus{}ext} \PY{o}{=} \PY{l+m+mi}{800}
+         
+         \PY{c+c1}{\PYZsh{} synapses}
+         \PY{n}{C\PYZus{}E} \PY{o}{=} \PY{n}{N\PYZus{}E}
+         \PY{n}{C\PYZus{}I} \PY{o}{=} \PY{n}{N\PYZus{}I}
+         
+         \PY{c+c1}{\PYZsh{} AMPA (excitatory)}
+         \PY{n}{g\PYZus{}AMPA\PYZus{}ext\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{2.08} \PY{o}{*} \PY{n}{nS}
+         \PY{n}{g\PYZus{}AMPA\PYZus{}rec\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{0.104} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{800.} \PY{o}{/} \PY{n}{N\PYZus{}E}
+         \PY{n}{g\PYZus{}AMPA\PYZus{}ext\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{1.62} \PY{o}{*} \PY{n}{nS}
+         \PY{n}{g\PYZus{}AMPA\PYZus{}rec\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{0.081} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{800.} \PY{o}{/} \PY{n}{N\PYZus{}E}
+         \PY{n}{tau\PYZus{}AMPA} \PY{o}{=} \PY{l+m+mf}{2.} \PY{o}{*} \PY{n}{ms}
+         
+         \PY{c+c1}{\PYZsh{} NMDA (excitatory)}
+         \PY{n}{g\PYZus{}NMDA\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{0.327} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{800.} \PY{o}{/} \PY{n}{N\PYZus{}E}
+         \PY{n}{g\PYZus{}NMDA\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{0.258} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{800.} \PY{o}{/} \PY{n}{N\PYZus{}E}
+         \PY{n}{tau\PYZus{}NMDA\PYZus{}rise} \PY{o}{=} \PY{l+m+mf}{2.} \PY{o}{*} \PY{n}{ms}
+         \PY{n}{tau\PYZus{}NMDA\PYZus{}decay} \PY{o}{=} \PY{l+m+mf}{100.} \PY{o}{*} \PY{n}{ms}
+         \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{/} \PY{n}{ms}
+         \PY{n}{Mg2} \PY{o}{=} \PY{l+m+mf}{1.}
+         
+         \PY{c+c1}{\PYZsh{} GABAergic (inhibitory)}
+         \PY{n}{g\PYZus{}GABA\PYZus{}E} \PY{o}{=} \PY{l+m+mf}{1.25} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{200.} \PY{o}{/} \PY{n}{N\PYZus{}I}
+         \PY{n}{g\PYZus{}GABA\PYZus{}I} \PY{o}{=} \PY{l+m+mf}{0.973} \PY{o}{*} \PY{n}{nS} \PY{o}{*} \PY{l+m+mf}{200.} \PY{o}{/} \PY{n}{N\PYZus{}I}
+         \PY{n}{tau\PYZus{}GABA} \PY{o}{=} \PY{l+m+mf}{10.} \PY{o}{*} \PY{n}{ms}
+         
+         \PY{c+c1}{\PYZsh{} subpopulations}
+         \PY{n}{f} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{p} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{N\PYZus{}sub} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{N\PYZus{}E} \PY{o}{*} \PY{n}{f}\PY{p}{)}
+         \PY{n}{N\PYZus{}non} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{N\PYZus{}E} \PY{o}{*} \PY{p}{(}\PY{l+m+mf}{1.} \PY{o}{\PYZhy{}} \PY{n}{f} \PY{o}{*} \PY{n}{p}\PY{p}{)}\PY{p}{)}
+         \PY{n}{w\PYZus{}plus} \PY{o}{=} \PY{l+m+mf}{2.1}
+         \PY{n}{w\PYZus{}minus} \PY{o}{=} \PY{l+m+mf}{1.} \PY{o}{\PYZhy{}} \PY{n}{f} \PY{o}{*} \PY{p}{(}\PY{n}{w\PYZus{}plus} \PY{o}{\PYZhy{}} \PY{l+m+mf}{1.}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mf}{1.} \PY{o}{\PYZhy{}} \PY{n}{f}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} modeling}
+         \PY{n}{eqs\PYZus{}E} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{dv / dt = (\PYZhy{} g\PYZus{}m\PYZus{}E * (v \PYZhy{} V\PYZus{}L) \PYZhy{} I\PYZus{}syn) / C\PYZus{}m\PYZus{}E : volt (unless refractory)}
+         
+         \PY{l+s+s1}{I\PYZus{}syn = I\PYZus{}AMPA\PYZus{}ext + I\PYZus{}AMPA\PYZus{}rec + I\PYZus{}NMDA\PYZus{}rec + I\PYZus{}GABA\PYZus{}rec : amp}
+         
+         \PY{l+s+s1}{I\PYZus{}AMPA\PYZus{}ext = g\PYZus{}AMPA\PYZus{}ext\PYZus{}E * (v \PYZhy{} V\PYZus{}E) * s\PYZus{}AMPA\PYZus{}ext : amp}
+         \PY{l+s+s1}{I\PYZus{}AMPA\PYZus{}rec = g\PYZus{}AMPA\PYZus{}rec\PYZus{}E * (v \PYZhy{} V\PYZus{}E) * 1 * s\PYZus{}AMPA : amp}
+         \PY{l+s+s1}{ds\PYZus{}AMPA\PYZus{}ext / dt = \PYZhy{} s\PYZus{}AMPA\PYZus{}ext / tau\PYZus{}AMPA : 1}
+         \PY{l+s+s1}{ds\PYZus{}AMPA / dt = \PYZhy{} s\PYZus{}AMPA / tau\PYZus{}AMPA : 1}
+         
+         \PY{l+s+s1}{I\PYZus{}NMDA\PYZus{}rec = g\PYZus{}NMDA\PYZus{}E * (v \PYZhy{} V\PYZus{}E) / (1 + Mg2 * exp(\PYZhy{}0.062 * v / mV) / 3.57) * s\PYZus{}NMDA\PYZus{}tot : amp}
+         \PY{l+s+s1}{s\PYZus{}NMDA\PYZus{}tot : 1}
+         
+         \PY{l+s+s1}{I\PYZus{}GABA\PYZus{}rec = g\PYZus{}GABA\PYZus{}E * (v \PYZhy{} V\PYZus{}I) * s\PYZus{}GABA : amp}
+         \PY{l+s+s1}{ds\PYZus{}GABA / dt = \PYZhy{} s\PYZus{}GABA / tau\PYZus{}GABA : 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{eqs\PYZus{}I} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{dv / dt = (\PYZhy{} g\PYZus{}m\PYZus{}I * (v \PYZhy{} V\PYZus{}L) \PYZhy{} I\PYZus{}syn) / C\PYZus{}m\PYZus{}I : volt (unless refractory)}
+         
+         \PY{l+s+s1}{I\PYZus{}syn = I\PYZus{}AMPA\PYZus{}ext + I\PYZus{}AMPA\PYZus{}rec + I\PYZus{}NMDA\PYZus{}rec + I\PYZus{}GABA\PYZus{}rec : amp}
+         
+         \PY{l+s+s1}{I\PYZus{}AMPA\PYZus{}ext = g\PYZus{}AMPA\PYZus{}ext\PYZus{}I * (v \PYZhy{} V\PYZus{}E) * s\PYZus{}AMPA\PYZus{}ext : amp}
+         \PY{l+s+s1}{I\PYZus{}AMPA\PYZus{}rec = g\PYZus{}AMPA\PYZus{}rec\PYZus{}I * (v \PYZhy{} V\PYZus{}E) * 1 * s\PYZus{}AMPA : amp}
+         \PY{l+s+s1}{ds\PYZus{}AMPA\PYZus{}ext / dt = \PYZhy{} s\PYZus{}AMPA\PYZus{}ext / tau\PYZus{}AMPA : 1}
+         \PY{l+s+s1}{ds\PYZus{}AMPA / dt = \PYZhy{} s\PYZus{}AMPA / tau\PYZus{}AMPA : 1}
+         
+         \PY{l+s+s1}{I\PYZus{}NMDA\PYZus{}rec = g\PYZus{}NMDA\PYZus{}I * (v \PYZhy{} V\PYZus{}E) / (1 + Mg2 * exp(\PYZhy{}0.062 * v / mV) / 3.57) * s\PYZus{}NMDA\PYZus{}tot : amp}
+         \PY{l+s+s1}{s\PYZus{}NMDA\PYZus{}tot : 1}
+         
+         \PY{l+s+s1}{I\PYZus{}GABA\PYZus{}rec = g\PYZus{}GABA\PYZus{}I * (v \PYZhy{} V\PYZus{}I) * s\PYZus{}GABA : amp}
+         \PY{l+s+s1}{ds\PYZus{}GABA / dt = \PYZhy{} s\PYZus{}GABA / tau\PYZus{}GABA : 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{P\PYZus{}E} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N\PYZus{}E}\PY{p}{,} \PY{n}{eqs\PYZus{}E}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v \PYZgt{} V\PYZus{}thr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reset}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v = V\PYZus{}reset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{refractory}\PY{o}{=}\PY{n}{tau\PYZus{}rp\PYZus{}E}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{P\PYZus{}E}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{n}{V\PYZus{}L}
+         \PY{n}{P\PYZus{}I} \PY{o}{=} \PY{n}{NeuronGroup}\PY{p}{(}\PY{n}{N\PYZus{}I}\PY{p}{,} \PY{n}{eqs\PYZus{}I}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v \PYZgt{} V\PYZus{}thr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{reset}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{v = V\PYZus{}reset}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{refractory}\PY{o}{=}\PY{n}{tau\PYZus{}rp\PYZus{}I}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{P\PYZus{}I}\PY{o}{.}\PY{n}{v} \PY{o}{=} \PY{n}{V\PYZus{}L}
+         
+         \PY{n}{eqs\PYZus{}glut} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{s\PYZus{}NMDA\PYZus{}tot\PYZus{}post = w * s\PYZus{}NMDA : 1 (summed)}
+         \PY{l+s+s1}{ds\PYZus{}NMDA / dt = \PYZhy{} s\PYZus{}NMDA / tau\PYZus{}NMDA\PYZus{}decay + alpha * x * (1 \PYZhy{} s\PYZus{}NMDA) : 1 (clock\PYZhy{}driven)}
+         \PY{l+s+s1}{dx / dt = \PYZhy{} x / tau\PYZus{}NMDA\PYZus{}rise : 1 (clock\PYZhy{}driven)}
+         \PY{l+s+s1}{w : 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{eqs\PYZus{}pre\PYZus{}glut} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{s\PYZus{}AMPA += w}
+         \PY{l+s+s1}{x += 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{eqs\PYZus{}pre\PYZus{}gaba} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{s\PYZus{}GABA += 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{n}{eqs\PYZus{}pre\PYZus{}ext} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext += 1}
+         \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         
+         \PY{c+c1}{\PYZsh{} E to E}
+         \PY{n}{C\PYZus{}E\PYZus{}E} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{,} \PY{n}{P\PYZus{}E}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{n}{eqs\PYZus{}glut}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}pre\PYZus{}glut}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i != j}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{w}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{k}{for} \PY{n}{pi} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}non}\PY{p}{,} \PY{n}{N\PYZus{}non} \PY{o}{+} \PY{n}{p} \PY{o}{*} \PY{n}{N\PYZus{}sub}\PY{p}{,} \PY{n}{N\PYZus{}sub}\PY{p}{)}\PY{p}{:}
+         
+             \PY{c+c1}{\PYZsh{} internal other subpopulation to current nonselective}
+             \PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{w}\PY{p}{[}\PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{indices}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{pi}\PY{p}{:}\PY{n}{pi} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{w\PYZus{}minus}
+         
+             \PY{c+c1}{\PYZsh{} internal current subpopulation to current subpopulation}
+             \PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{w}\PY{p}{[}\PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{indices}\PY{p}{[}\PY{n}{pi}\PY{p}{:}\PY{n}{pi} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{,} \PY{n}{pi}\PY{p}{:}\PY{n}{pi} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{n}{w\PYZus{}plus}
+         
+         \PY{c+c1}{\PYZsh{} E to I}
+         \PY{n}{C\PYZus{}E\PYZus{}I} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{,} \PY{n}{P\PYZus{}I}\PY{p}{,} \PY{n}{model}\PY{o}{=}\PY{n}{eqs\PYZus{}glut}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}pre\PYZus{}glut}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}E\PYZus{}I}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{p}{)}
+         \PY{n}{C\PYZus{}E\PYZus{}I}\PY{o}{.}\PY{n}{w}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{c+c1}{\PYZsh{} I to I}
+         \PY{n}{C\PYZus{}I\PYZus{}I} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{,} \PY{n}{P\PYZus{}I}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}pre\PYZus{}gaba}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}I\PYZus{}I}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{i != j}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} I to E}
+         \PY{n}{C\PYZus{}I\PYZus{}E} \PY{o}{=} \PY{n}{Synapses}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{,} \PY{n}{P\PYZus{}E}\PY{p}{,} \PY{n}{on\PYZus{}pre}\PY{o}{=}\PY{n}{eqs\PYZus{}pre\PYZus{}gaba}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{euler}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}I\PYZus{}E}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} external noise}
+         \PY{n}{C\PYZus{}P\PYZus{}E} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}ext}\PY{p}{,} \PY{n}{rate}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{C\PYZus{}P\PYZus{}I} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}ext}\PY{p}{,} \PY{n}{rate}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} at 1s, select population 1}
+         \PY{n}{C\PYZus{}selection} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{f} \PY{o}{*} \PY{n}{C\PYZus{}ext}\PY{p}{)}
+         \PY{n}{rate\PYZus{}selection} \PY{o}{=} \PY{l+m+mi}{25} \PY{o}{*} \PY{n}{Hz}
+         \PY{n}{stimuli1} \PY{o}{=} \PY{n}{TimedArray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{40}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{25} \PY{o}{*} \PY{n}{ms}\PY{p}{)}
+         \PY{n}{input1} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{n}{N\PYZus{}non}\PY{p}{:}\PY{n}{N\PYZus{}non} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}selection}\PY{p}{,} \PY{n}{rate\PYZus{}selection}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stimuli1(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} at 2s, select population 2}
+         \PY{n}{stimuli2} \PY{o}{=} \PY{n}{TimedArray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{80}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{25} \PY{o}{*} \PY{n}{ms}\PY{p}{)}
+         \PY{n}{input2} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{n}{N\PYZus{}non} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{:}\PY{n}{N\PYZus{}non} \PY{o}{+} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{N\PYZus{}sub}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}selection}\PY{p}{,} \PY{n}{rate\PYZus{}selection}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stimuli2(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} at 4s, reset selection}
+         \PY{n}{stimuli\PYZus{}reset} \PY{o}{=} \PY{n}{TimedArray}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{r\PYZus{}}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{dt}\PY{o}{=}\PY{l+m+mi}{25} \PY{o}{*} \PY{n}{ms}\PY{p}{)}
+         \PY{n}{input\PYZus{}reset\PYZus{}I} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}ext}\PY{p}{,} \PY{n}{rate\PYZus{}selection}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stimuli\PYZus{}reset(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{input\PYZus{}reset\PYZus{}E} \PY{o}{=} \PY{n}{PoissonInput}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s\PYZus{}AMPA\PYZus{}ext}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{C\PYZus{}ext}\PY{p}{,} \PY{n}{rate\PYZus{}selection}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stimuli\PYZus{}reset(t)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} monitors}
+         \PY{n}{N\PYZus{}activity\PYZus{}plot} \PY{o}{=} \PY{l+m+mi}{15}
+         \PY{n}{sp\PYZus{}E\PYZus{}sels} \PY{o}{=} \PY{p}{[}\PY{n}{SpikeMonitor}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{n}{pi}\PY{p}{:}\PY{n}{pi} \PY{o}{+} \PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{pi} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}non}\PY{p}{,} \PY{n}{N\PYZus{}non} \PY{o}{+} \PY{n}{p} \PY{o}{*} \PY{n}{N\PYZus{}sub}\PY{p}{,} \PY{n}{N\PYZus{}sub}\PY{p}{)}\PY{p}{]}
+         \PY{n}{sp\PYZus{}E} \PY{o}{=} \PY{n}{SpikeMonitor}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{p}{:}\PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{]}\PY{p}{)}
+         \PY{n}{sp\PYZus{}I} \PY{o}{=} \PY{n}{SpikeMonitor}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{[}\PY{p}{:}\PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{r\PYZus{}E\PYZus{}sels} \PY{o}{=} \PY{p}{[}\PY{n}{PopulationRateMonitor}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{n}{pi}\PY{p}{:}\PY{n}{pi} \PY{o}{+} \PY{n}{N\PYZus{}sub}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{pi} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N\PYZus{}non}\PY{p}{,} \PY{n}{N\PYZus{}non} \PY{o}{+} \PY{n}{p} \PY{o}{*} \PY{n}{N\PYZus{}sub}\PY{p}{,} \PY{n}{N\PYZus{}sub}\PY{p}{)}\PY{p}{]}
+         \PY{n}{r\PYZus{}E} \PY{o}{=} \PY{n}{PopulationRateMonitor}\PY{p}{(}\PY{n}{P\PYZus{}E}\PY{p}{[}\PY{p}{:}\PY{n}{N\PYZus{}non}\PY{p}{]}\PY{p}{)}
+         \PY{n}{r\PYZus{}I} \PY{o}{=} \PY{n}{PopulationRateMonitor}\PY{p}{(}\PY{n}{P\PYZus{}I}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} simulate, can be long \PYZgt{}120s}
+         \PY{n}{net} \PY{o}{=} \PY{n}{Network}\PY{p}{(}\PY{n}{collect}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{net}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{sp\PYZus{}E\PYZus{}sels}\PY{p}{)}
+         \PY{n}{net}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{r\PYZus{}E\PYZus{}sels}\PY{p}{)}
+         \PY{n}{net}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{*} \PY{n}{s}\PY{p}{,} \PY{n}{report}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stdout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} plotting}
+         \PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population rates}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hz}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Starting simulation at t=0. s for a duration of 40. ms
+0.04 (100\%) simulated in 3s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        ValueError                                Traceback (most recent call last)
+
+        <ipython-input-36-3d23fa84aed8> in <module>()
+        187 ylabel('Hz')
+        188 
+    --> 189 plot(r\_E.t / ms, r\_E.smooth\_rate(width=25 * ms) / Hz, label='nonselective')
+        190 plot(r\_I.t / ms, r\_I.smooth\_rate(width=25 * ms) / Hz, label='inhibitory')
+        191 
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/pyplot.py in plot(*args, **kwargs)
+       3356                       mplDeprecation)
+       3357     try:
+    -> 3358         ret = ax.plot(*args, **kwargs)
+       3359     finally:
+       3360         ax.\_hold = washold
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/\_\_init\_\_.py in inner(ax, *args, **kwargs)
+       1853                         "the Matplotlib list!)" \% (label\_namer, func.\_\_name\_\_),
+       1854                         RuntimeWarning, stacklevel=2)
+    -> 1855             return func(ax, *args, **kwargs)
+       1856 
+       1857         inner.\_\_doc\_\_ = \_add\_data\_doc(inner.\_\_doc\_\_,
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/axes/\_axes.py in plot(self, *args, **kwargs)
+       1525         kwargs = cbook.normalize\_kwargs(kwargs, \_alias\_map)
+       1526 
+    -> 1527         for line in self.\_get\_lines(*args, **kwargs):
+       1528             self.add\_line(line)
+       1529             lines.append(line)
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/axes/\_base.py in \_grab\_next\_args(self, *args, **kwargs)
+        404                 this += args[0],
+        405                 args = args[1:]
+    --> 406             for seg in self.\_plot\_args(this, kwargs):
+        407                 yield seg
+        408 
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/axes/\_base.py in \_plot\_args(self, tup, kwargs)
+        381             x, y = index\_of(tup[-1])
+        382 
+    --> 383         x, y = self.\_xy\_from\_xy(x, y)
+        384 
+        385         if self.command == 'plot':
+
+
+        \textasciitilde{}/anaconda3/envs/my-brian2-env/lib/python3.6/site-packages/matplotlib/axes/\_base.py in \_xy\_from\_xy(self, x, y)
+        240         if x.shape[0] != y.shape[0]:
+        241             raise ValueError("x and y must have same first dimension, but "
+    --> 242                              "have shapes \{\} and \{\}".format(x.shape, y.shape))
+        243         if x.ndim > 2 or y.ndim > 2:
+        244             raise ValueError("x and y can be no greater than 2-D, but have "
+
+
+        ValueError: x and y must have same first dimension, but have shapes (400,) and (1001,)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_17_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}E}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{r\PYZus{}E}\PY{o}{.}\PY{n}{smooth\PYZus{}rate}\PY{p}{(}\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{5} \PY{o}{*} \PY{n}{ms}\PY{p}{)} \PY{o}{/} \PY{n}{Hz}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonselective}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}I}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{r\PYZus{}I}\PY{o}{.}\PY{n}{smooth\PYZus{}rate}\PY{p}{(}\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{5} \PY{o}{*} \PY{n}{ms}\PY{p}{)} \PY{o}{/} \PY{n}{Hz}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inhibitory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{r\PYZus{}E\PYZus{}sel} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{r\PYZus{}E\PYZus{}sels}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{r\PYZus{}E\PYZus{}sel}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{r\PYZus{}E\PYZus{}sel}\PY{o}{.}\PY{n}{smooth\PYZus{}rate}\PY{p}{(}\PY{n}{width}\PY{o}{=}\PY{l+m+mi}{5} \PY{o}{*} \PY{n}{ms}\PY{p}{)} \PY{o}{/} \PY{n}{Hz}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{selective }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Population activities (}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{ neurons/pop)}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{)}\PY{p}{)}
+         \PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ms}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{yticks}\PY{p}{(}\PY{p}{[}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{plot}\PY{p}{(}\PY{n}{sp\PYZus{}E}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{sp\PYZus{}E}\PY{o}{.}\PY{n}{i} \PY{o}{+} \PY{p}{(}\PY{n}{p} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nonselective}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plot}\PY{p}{(}\PY{n}{sp\PYZus{}I}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{sp\PYZus{}I}\PY{o}{.}\PY{n}{i} \PY{o}{+} \PY{n}{p} \PY{o}{*} \PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inhibitory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{sp\PYZus{}E\PYZus{}sel} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{sp\PYZus{}E\PYZus{}sels}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plot}\PY{p}{(}\PY{n}{sp\PYZus{}E\PYZus{}sel}\PY{o}{.}\PY{n}{t} \PY{o}{/} \PY{n}{ms}\PY{p}{,} \PY{n}{sp\PYZus{}E\PYZus{}sel}\PY{o}{.}\PY{n}{i} \PY{o}{+} \PY{p}{(}\PY{n}{p} \PY{o}{\PYZhy{}} \PY{n}{i} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{n}{N\PYZus{}activity\PYZus{}plot}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{markersize}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{selective }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{p} \PY{o}{\PYZhy{}} \PY{n}{i}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n}{C\PYZus{}E\PYZus{}E}\PY{o}{.}\PY{n}{w}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} <synapses\_6.w: array([1. , 1. , 1. , {\ldots}, 2.1, 2.1, 2.1])>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n}{tanh}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}43}]:} 0.9640275800758169
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
